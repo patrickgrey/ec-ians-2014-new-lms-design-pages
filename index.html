@@ -19,31 +19,95 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="application-name" content="EUROCONTROL e-learning" />
         <meta name="apple-mobile-web-app-title" content="EUROCONTROL e-learning" />
-        <title>EUROCONTROL: new e-learning > overview page</title>
+        <title>EUROCONTROL: new e-learning > page 1</title>
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         
 
         <link rel="stylesheet" href="styles/main.css">
+        
+        <link href='http://fonts.googleapis.com/css?family=Merriweather:400,700|Roboto:300' rel='stylesheet' type='text/css'>
 
-        <script src="scripts/vendor/modernizr.js"></script>
+        
     </head>
     <body>
         
         <div class="ec-container">
         
-            <div class="ec-header">
-                <h1>EUROCONTROL e-learning</h1>
+            <div class="ec-header" id="top">
+                
+                <h1>
+                    <a href="#settings" class="ec-button-settings ec-logo ec-menu-toggle-settings ec-button-settings-index"><span class="ec-hidden-text">EUROCONTROL e-learning</span></a>
+                </h1>
+                
+                <!-- <a href="#navigation" class="ec-button-menu ec-icon-navigation ec-menu-toggle-nav"><span class="ec-hidden-text">navigation</span></a> -->
+                
             </div>
             
-            <div class="ec-content">
-                <h2>Launch page</h2>
+            <div class="ec-content" role="main">
+            
+                <h2 class="ec-title-page">Aircraft Performance</h2>
+                
+                <div class="ec-content-padded">
+                
+                    <p>This course is about... (brief overview). You can find guidance on using this module <a href="#">here</a>. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione reprehenderit perferendis praesentium autem. Magnam, sint qui, accusantium assumenda deleniti aliquam non ullam explicabo architecto rem harum labore facere, porro maiores.</p>
+                </div>
+                
+                <a href="page1.html" class="ec-register">Register</a>
+                
+                <div class='ec-youtube-limiter'>
+                    <div class='ec-youtube-container'>
+                        <iframe class="ec-youtube" src="https://www.youtube.com/embed/Pm_WAWZNbdA?controls=0&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>
+                        <!-- <div class="ec-youtube"></div> -->
+                    </div>
+                </div>
+                
             </div>
             
-            <div class="ec-footer">
+            <div class="ec-footer ec-content-padded">
                 <p>&copy; EUROCONTROL 2015</p>
             </div>
+            
         </div>
+        
+        <!-- <nav class="ec-nav-navigation" role="navigation" id="navigation">
+            
+                
+                <a href="#top" class="ec-nav-dismiss ec-menu-toggle-nav">Dismiss</a>
+                
+                <a href="#" class="ec-nav-next-title">Next:<br/>Page 2 title.</a>
+                <a href="#" class="ec-nav-previous-title">Previous:<br/>Previous page title.</a>
+                
+                <ul class="ec-nav__links ec-nav-navigation__links">
+                    <li class="ec-nav-navigation__item"><a href="#" class="primary-nav__link ec-nav-navigation__link ec-nav-navigation__next"><span class="ec-hidden-text">Next</span></a></li>
+                    <li class="ec-nav-navigation__item"><a href="#" class="primary-nav__link ec-nav-navigation__link ec-nav-navigation__previous"><span class="ec-hidden-text">Previous</span></a></li>
+                    <li class="ec-nav-navigation__item"><a href="#" class="primary-nav__link ec-nav-navigation__link ec-nav-navigation__complete"><span class="ec-hidden-text">Complete</span></a></li>
+                </ul>
+                
+                <ul class="ec-nav__links ec-nav-progress__links">
+                    <li class="ec-nav-navigation__item"><a href="#" class="primary-nav__link ec-nav-navigation__link ec-nav-navigation__progress ec-nav-navigation__progress-complete">Module overview</a></li>
+                    <li class="ec-nav-navigation__item"><a href="#" class="primary-nav__link ec-nav-navigation__link ec-nav-navigation__progress ec-nav-navigation__progress-complete">Page 1</a></li>
+                    <li class="ec-nav-navigation__item"><a href="#" class="primary-nav__link ec-nav-navigation__link ec-nav-navigation__progress ec-nav-navigation__progress-started">Page 2</a></li>
+                    <li class="ec-nav-navigation__item"><a href="#" class="primary-nav__link ec-nav-navigation__link ec-nav-navigation__progress">Page 3</a></li>
+                </ul>
+                
+            
+        </nav> -->
+        
+        <nav class="ec-nav-settings" role="navigation" id="settings">
+        
+            <!-- <div class="ec-nav-site"> -->
+                
+                <a href="#top" class="ec-nav-dismiss ec-menu-toggle-settings">Dismiss</a>
+                
+                <ul class="ec-nav__links">
+                    <li class="ec-nav-settings__item"><a href="#" class="primary-nav__link ec-nav-settings__link ec-nav-settings__home">Home</a></li>
+                    <li class="ec-nav-settings__item"><a href="#" class="primary-nav__link ec-nav-settings__link ec-nav-settings__help">Help</a></li>
+                    <li class="ec-nav-settings__item"><a href="#" class="primary-nav__link ec-nav-settings__link ec-nav-settings__profile">Profile</a></li>
+                </ul>
+                
+            <!-- </div> -->
+        </nav>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
