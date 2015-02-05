@@ -50,7 +50,7 @@
                 
                 <div class='ec-youtube-limiter'>
                     <div class='ec-youtube-container'>
-                        <iframe class="ec-youtube" src="https://www.youtube.com/embed/P_0R0eWOKns?controls=0&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>
+                        <iframe class="ec-youtube" src="https://www.youtube.com/embed/EFF27P2bDX4?controls=0&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>
                         <!-- <div class="ec-youtube"></div> -->
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                     <p>The aircraft will continue flying at the same velocity, i.e. at the same speed and in the same direction, unless, for example, the pilot or a gust of wind alters this situation.</p>
                 </div>
                 
-                <object class="ec-activity-svg" data="images/ec-ACAS-t3p3a1.svg" type="image/svg+xml" width="100%" height="auto" ></object>
+                <object class="ec-activity-svg" id="activity1" data="images/ec-ACAS-t3p3a1v2.svg" type="image/svg+xml" width="100%" height="auto" ></object>
                 
                 <div class="ec-content-padded">
                     <p>The magnitude (size) of the lift (and therefore the weight) during cruise flight will be approximately 10 times greater than the drag (and thrust). This relationship of lift to drag is very important and is referred to as the <strong>Lift/Drag ratio</strong> (L/D ratio). The L/D ratio is in this case 10 to 1, i.e. the lift is 10 times greater than the drag. </p>
@@ -91,7 +91,7 @@
                 
                 <ul class="ec-nav__links ec-nav-navigation__links">
                     <li class="ec-nav-navigation__item"><a href="#" class="primary-nav__link ec-nav-navigation__link ec-nav-navigation__next"><span class="ec-hidden-text">Next</span></a></li>
-                    <li class="ec-nav-navigation__item"><a href="#" class="primary-nav__link ec-nav-navigation__link ec-nav-navigation__previous"><span class="ec-hidden-text">Previous</span></a></li>
+                    <li class="ec-nav-navigation__item"><a href="index.html" class="primary-nav__link ec-nav-navigation__link ec-nav-navigation__previous"><span class="ec-hidden-text">Previous</span></a></li>
                     <li class="ec-nav-navigation__item"><a href="#" class="primary-nav__link ec-nav-navigation__link ec-nav-navigation__complete"><span class="ec-hidden-text">Complete</span></a></li>
                 </ul>
                 
@@ -134,5 +134,215 @@
         <script src="scripts/vendor.js"></script>
         
         <script src="scripts/main.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.15.1/TweenMax.min.js"></script>
+        <script type="text/javascript">
+            (function ( ec_ACAS_t3p3a1, undefined ) {
+                
+                var all,
+                    dt = 0.5, // defaultTime for animations
+                    audioPath = 'audio',
+                    audioArray = ['Adjust_Vertical_Speed', 'Clear_Of_Conflict', 'Descend'],
+                    hideOnStartArray,
+                    setButtonCursorArray,
+                    currentTimeline = 1, //  start on 1 as timeline0 called on init.
+                    timeline0 = new TimelineMax(),
+                    timeline1 = new TimelineMax(),
+                    timeline2 = new TimelineMax(),
+                    timeline3 = new TimelineMax(),
+                    timelineArray = [timeline0, timeline1, timeline2];
+                    
+                ec_ACAS_t3p3a1.init = function () {
+                    
+                    all = getSVGElementsWithID(document.getElementById("activity1").getSVGDocument());
+                    
+                    hideOnStartArray = [
+                        all.text3, all.text4, all.text5, all.text6,
+                        all.buttonReplay, all.buttonNext, all.buttonStart,
+                        all.arrow3, all.arrow4
+                    ];
+                    
+                    setButtonCursorArray = [
+                        all.buttonReplay, all.buttonNext, all.buttonStart
+                    ];
+                    
+                    $(all.buttonNext).click(function (e) {
+                        handleNextClick();
+                    });
+                    
+                    $(all.buttonStart).click(function (e) {
+                        handleNextClick();
+                    });
+                    
+                    $(all.buttonReplay).click(function (e) {
+                        replay();
+                    });
+                    
+                    createAudio();
+                    setStartPoint();
+                    defineTimelines();
+                    startAnimation1();
+                    
+                };
+                
+                var replay = function () {
+                    setStartPoint();
+                    resetTimelines();
+                };
+                
+                var resetTimelines = function () {
+                    // timeline0.duration(0.1).reverse();
+                    // timeline1.duration(0.1).reverse();
+                    /*timeline2.restart().stop();
+                    timeline1.restart().stop();
+                    timeline0.restart().stop();*/
+                    for (var i = timelineArray.length-1; i > 0; i--) {
+                        timelineArray[i].restart().stop();
+                    };
+                    currentTimeline = 1;
+                    // timeline0.play();
+                    setTimeout(function () { 
+                        console.log(timeline0.duration());
+                        timeline0.play(0);
+                    }, 500);
+                };
+                
+                var handleNextClick = function () {
+                    $(all.buttonNext).css('visibility', 'hidden');
+                    $(all.buttonStart).css('visibility', 'hidden');
+                    timelineArray[currentTimeline].play();
+                    currentTimeline++;
+                };
+                
+                var startAnimation1 = function () {
+                    timeline0.play();
+                    
+                    /*for (var i = 1; i < timelineArray.length; i++) {
+                        setTimeout(function () { handleNextClick();}, i*500);
+                    };*/
+                    
+                    // setTimeout(function () {
+                    //     timeline1.restart()
+                    //     // .stop();
+                    // }, 4000);
+                };
+                
+                var setStartPoint = function () {
+                    TweenMax.set(setButtonCursorArray, {cursor:'pointer'});
+                    TweenMax.set(hideOnStartArray, {autoAlpha:0});
+                    TweenMax.set(hideOnStartArray, {autoAlpha:0});
+                    TweenMax.set([all.acft1, all.acft2], {transformOrigin:"55% 70%"});
+                }
+                
+                var defineTimelines = function () {
+                    
+                    timeline0
+                    .to(all.text5, dt, {autoAlpha:1})
+                    .to(all.buttonStart, dt, {delay:1, autoAlpha:1})
+                    // .duration(0.1)
+                    .stop();
+                    // setTimeout(function () { handleNextClick();}, 500);
+                    
+                    
+                    
+                    // currentTimeline = 1;
+                    timeline1
+                    .to(all.text3, dt, {delay:1, autoAlpha:1})
+                    .call( callAudio, ['audio2'])
+                    .to(all.acft1, dt, {delay:dt, x: '+=40', ease:Linear.easeNone})
+                    .to(all.acft1, dt*3, {x: '+=100',  y: '+=43', rotation: "+=23", ease:Linear.easeNone})
+                    .to(all.acft2, dt*4, {delay:-dt*4, x: '-=60',  y: '+=21', ease:Linear.easeNone})
+                    .to(all.text6, dt, {delay:1, autoAlpha:1})
+                    .to(all.buttonNext, dt, {delay:1, autoAlpha:1})
+                    // .duration(0.1)
+                    .stop();
+                    // setTimeout(function () { handleNextClick();}, 1000);
+                    
+                    // currentTimeline = 2;
+                    timeline2
+                    .to(all.text4, dt, {delay:1, autoAlpha:1})
+                    .call( callAudio, ['audio0'])
+                    .to(all.acft1, dt*3, {delay:dt*2, x: '+=100',  y: '+=15', rotation: "-=23", ease:Linear.easeNone})
+                    .to(all.acft2, dt*1, {delay:-dt*3,  y: '+=20', rotation: "+=19", ease:Linear.easeNone})
+                    .to(all.acft2, dt*4, {delay:-dt*3, x: '-=150', ease:Linear.easeNone})
+                    .to(all.arrow3, dt, {autoAlpha: 1})
+                    .to(all.arrow4, dt, {autoAlpha: 1})
+                    .call( callAudio, ['audio1'])
+                    .to(all.buttonReplay, dt, {delay:1, autoAlpha:1})
+                    // .duration(0.1)
+                    .stop();
+                    
+                    
+                    // .to( all.acft1, 5, {
+                    //     bezier:{
+                    //         values:[ {x:30, y:0}, {x:40, y:0}, {x:200, y:100} ], autoRotate:true
+                    //     },
+                    //     delay:.5
+                    // } ); 
+                    // .to(all.acft1, dt*2, {delay:dt, x: '+=60',  y: '+=30', rotation: 20});
+                    
+                    // console.log(all.acft1._gsTransform.x);
+                };
+                
+                /* UTILITY FUNCTIONS */
+                
+                var callAudio = function (audioName) {
+                    all[audioName].play();
+                };
+                /**
+                 * AUDIO tags can be included in SVG but
+                 * I decided to keep all audio work in JavaScript as the graphics should be maniputlated
+                 * by designers and not need to reinsert the audio code each time.
+                 * I could add AUDIO tags to the page declaritively but
+                 * I think it is neater to have it all here.
+                 */
+                var createAudio = function () {
+                    var audio;
+                    for (var i = 0; i < audioArray.length; i++) {
+                        audio = document.createElement("audio");
+                        // $(audio).attr('controls','');
+                        audio.src = audioPath + '/' + audioArray[i] + '.mp3';
+                        document.body.appendChild(audio);
+                        all['audio'+i] = audio;
+                    };
+                };
+                
+                
+                var getSVGElementsWithID = function (doc) {
+                    
+                    var elements = doc.getElementsByTagName('*'),
+                        elementContainer = {},
+                        attributeToFind = 'id',
+                        i = 0,
+                        currentElement;
+                        
+                    while(currentElement = elements[i++]){
+                        if (currentElement[attributeToFind]) {
+                            elementContainer[currentElement[attributeToFind]] = currentElement;
+                        }
+                    }
+                    
+                    return elementContainer;
+                }
+                /* UTILITY FUNCTIONS END */
+                
+                
+            })(window.ec_ACAS_t3p3a1 = window.ec_ACAS_t3p3a1 || {});
+            
+            
+            // There seems to be a race condition between this doc
+            // and the Object document svg content.
+            // 
+            var activity1 = document.getElementById("activity1");
+            if(activity1.getSVGDocument()) {
+                ec_ACAS_t3p3a1.init();
+            }
+            else {
+                activity1.addEventListener("load", function ec_ACAS_t3p3a1_load(event){
+                    activity1.removeEventListener("load", ec_ACAS_t3p3a1_load, false); //remove listener, no longer needed
+                    ec_ACAS_t3p3a1.init();
+                },false);
+            }
+        </script>
 </body>
 </html>
